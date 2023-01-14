@@ -1,4 +1,4 @@
-##Texas hold em with a single deck no jokers, atleast 3 players required
+##Texas hold em with 1 deck atleast 3 players required
 import random
 
 class Player:
