@@ -1,4 +1,4 @@
-##Texas hold em with 1 deck atleast 3 players required
+##Texas hold em with a single deck no jokers, atleast 3 players required
 import random
 
 class Player:
@@ -235,6 +235,8 @@ class Game:
             player.fold(self)
 
     def win_check(self):
+        winner = []
+        biggest_hand_value = float(0.0)
 
         if len(self.players) == 1:
             #self.players[0] is the winner
@@ -242,7 +244,17 @@ class Game:
         else:
             for player in self.players:
                 hand_creater(player)
-        
+                if player_hand_value > biggest_hand_value:
+                    biggest_hand_value = player.hand_value
+                    winner = list(player)
+                elif player.hand_value == biggest_hand_value:
+                    winner.append(player)
+
+        for player in winner:
+            #use floor divison for easier chip numbers
+            player.chips += (self.pot // len(winner))
+            print("Player: "+player.name+" ("+str(player.id)+") "+" has won "+str(self.pot // len(winner))+" chips.")
+            print("For a new total of: "+str(player.chips)+" chips")
 
     def hand_creater(self, player):
 
